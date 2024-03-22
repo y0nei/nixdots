@@ -58,6 +58,13 @@
     neovim
     wget
     git
+    alacritty  # terminal emulator
+    grim  # Screenshot utility
+    slurp  # Screenshot utility
+    wl-clipboard  # Clipboard copy/paste utility
+    mako  # Notification system from swaywm
+    bemenu  # dmenu like wayland menu
+    wofi  # rofi but wayland
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -68,7 +75,18 @@
     enableSSHSupport = true;
   };
 
+  # TODO: Setup kanshi (https://nixos.wiki/wiki/Sway#Systemd_services)
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
+
+  security.polkit.enable = true;
   services.openssh.enable = true;
+
+  # Enable the gnome-keyring secrets vault.
+  # Will be exposed through DBus to programs willing to store secrets.
+  services.gnome.gnome-keyring.enable = true;
 
   system.stateVersion = "23.11";
 }
