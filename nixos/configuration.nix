@@ -37,12 +37,24 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+  security.sudo.enable = false;
+  security.doas = {
+    enable = true;
+    extraRules = [{
+      users = [ "yonei" ];
+      keepEnv = true;
+      persist = true;
+    }];
+  };
+
   users.users.yonei = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
   };
 
   environment.systemPackages = with pkgs; [
+    # Wrapper to replace sudo with doas. The -e flag with sudo wont work.
+    (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
     neovim
     wget
     git
