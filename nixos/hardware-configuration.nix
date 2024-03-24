@@ -5,54 +5,64 @@
 
 {
   imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
+    (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/08f0d799-0d93-471f-b6b0-ddcd43ae0121";
+    device = "/dev/disk/by-uuid/f203be04-4c46-43a3-b3cf-f42f76741fb8";
     fsType = "btrfs";
-    options = [ "subvol=@" "compress-force=zstd:1" "noatime" "discard=async" "space_cache=v2" "commit=120" ];
+    options = [ "subvol=@" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/A7D6-5852";
+    device = "/dev/disk/by-uuid/D6F4-FD10";
     fsType = "vfat";
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/08f0d799-0d93-471f-b6b0-ddcd43ae0121";
+    device = "/dev/disk/by-uuid/f203be04-4c46-43a3-b3cf-f42f76741fb8";
     fsType = "btrfs";
-    options = [ "subvol=@home" "compress-force=zstd:1" "noatime" "discard=async" "space_cache=v2" "commit=120" ];
+    options = [ "subvol=@home" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/08f0d799-0d93-471f-b6b0-ddcd43ae0121";
+    device = "/dev/disk/by-uuid/f203be04-4c46-43a3-b3cf-f42f76741fb8";
     fsType = "btrfs";
-    options = [ "subvol=@nix" "compress-force=zstd:1" "noatime" "discard=async" "space_cache=v2" "commit=120" ];
+    options = [ "subvol=@nix" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/08f0d799-0d93-471f-b6b0-ddcd43ae0121";
+    device = "/dev/disk/by-uuid/f203be04-4c46-43a3-b3cf-f42f76741fb8";
     fsType = "btrfs";
     neededForBoot = true;
-    options = [ "subvol=@log" "compress-force=zstd:1" "noatime" "discard=async" "space_cache=v2" "commit=120" ];
+    options = [ "subvol=@log" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/var/cache" = {
-    device = "/dev/disk/by-uuid/08f0d799-0d93-471f-b6b0-ddcd43ae0121";
+    device = "/dev/disk/by-uuid/f203be04-4c46-43a3-b3cf-f42f76741fb8";
     fsType = "btrfs";
-    options = [ "subvol=@cache" "compress-force=zstd:1" "noatime" "discard=async" "space_cache=v2" "commit=120" ];
+    options = [ "subvol=@cache" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/tmp" = {
-    device = "/dev/disk/by-uuid/08f0d799-0d93-471f-b6b0-ddcd43ae0121";
+    device = "/dev/disk/by-uuid/f203be04-4c46-43a3-b3cf-f42f76741fb8";
     fsType = "btrfs";
-    options = [ "subvol=@tmp" "compress-force=zstd:1" "noatime" "discard=async" "space_cache=v2" "commit=120" ];
+    options = [ "subvol=@tmp" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
+  };
+
+  fileSystems."/.snapshots" = {
+    device = "/dev/disk/by-uuid/f203be04-4c46-43a3-b3cf-f42f76741fb8";
+    options = [ "subvol=@snapshots" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
+  };
+
+  fileSystems."/media/kingspec" = {
+    device = "/dev/disk/by-uuid/82061815-5806-42cf-8c0f-d2e826d363e6";
+    fsType = "ext4";
   };
 
   swapDevices = [ ];
@@ -62,7 +72,9 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp1s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
