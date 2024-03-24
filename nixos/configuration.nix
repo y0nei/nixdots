@@ -55,7 +55,7 @@
 
   users.users.yonei = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "networkmanager" ];
   };
 
   environment.systemPackages = with pkgs; [
