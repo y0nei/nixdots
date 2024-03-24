@@ -61,18 +61,18 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # Wrapper to replace sudo with doas. The -e flag with sudo wont work.
-    (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')
+    gcc git wget lm_sensors htop
+    (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')  # Replace sudo with doas
+    eza bat
+    fastfetch
+    zsh starship
     neovim
-    wget
-    git
-    alacritty  # terminal emulator
-    grim  # Screenshot utility
-    slurp  # Screenshot utility
-    wl-clipboard  # Clipboard copy/paste utility
-    mako  # Notification system from swaywm
-    bemenu  # dmenu like wayland menu
-    wofi  # rofi but wayland
+    xdg-utils
+    alacritty
+    pavucontrol
+    librewolf
+    telegram-desktop
+    keepassxc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -98,6 +98,17 @@
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
+    wrapperFeatures.base = true;
+    extraPackages = with pkgs; [
+      kanshi
+      bemenu wofi  # Menu launchers
+      grim slurp  # Screenshot utils
+      wl-clipboard cliphist  # Clipboard copy/paste
+      mako  # Notifications
+      # HACK: Waybar wants Wireplumber 0.4 but unstable has 0.5
+      (waybar.override { wireplumberSupport = false; })
+    ];
+  };
   xdg.portal = {
     enable = true;
     wlr.enable = true;
