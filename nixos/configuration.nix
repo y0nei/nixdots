@@ -10,15 +10,14 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.supportedFilesystems = [ "btrfs" ];
   boot.loader = {
-#    efi = {
-#       canTouchEfiVariables = true;  # Remove if in VM
-#    };
+    efi = {
+      canTouchEfiVariables = true;
+    };
     grub = {
-       enable = true;
-       efiInstallAsRemovable = true;  # Only for VM's
-       efiSupport = true;
-       enableCryptodisk = true;
-       device = "nodev";
+      enable = true;
+      efiSupport = true;
+      enableCryptodisk = true;
+      device = "nodev";
     };
   };
 
@@ -30,7 +29,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-    keyMap = "us";
+    keyMap = "pl";
   };
 
   # Enable sound.
