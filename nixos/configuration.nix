@@ -85,6 +85,14 @@
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+  };
+
   nixpkgs.config.packageOverrides = pkgs: {
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override {
         enableHybridCodec = true;
