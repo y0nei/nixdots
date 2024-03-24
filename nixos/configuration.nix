@@ -62,7 +62,7 @@
 
   environment.systemPackages = with pkgs; [
     gcc git wget lm_sensors htop
-    (pkgs.writeScriptBin "sudo" ''exec doas "$@"'')  # Replace sudo with doas
+    doas-sudo-shim
     eza bat
     fastfetch
     zsh starship
