@@ -12,6 +12,8 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.resumeDevice = "/dev/disk/by-uuid/f203be04-4c46-43a3-b3cf-f42f76741fb8";
+  boot.kernelParams = [ "resume_offset=3417344" ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/f203be04-4c46-43a3-b3cf-f42f76741fb8";
@@ -60,12 +62,18 @@
     options = [ "subvol=@snapshots" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
+  fileSystems."/swap" = {
+    device = "/dev/disk/by-uuid/f203be04-4c46-43a3-b3cf-f42f76741fb8";
+    fsType = "btrfs";
+    options = [ "subvol=@swap" "noatime" ];
+  };
+
   fileSystems."/media/kingspec" = {
     device = "/dev/disk/by-uuid/82061815-5806-42cf-8c0f-d2e826d363e6";
     fsType = "ext4";
   };
 
-  swapDevices = [ ];
+  swapDevices = [ { device = "/swap/swapfile"; } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
