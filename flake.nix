@@ -9,8 +9,7 @@
     };
   };
 
-
-  outputs = { self, nixpkgs, home-manager }: let
+  outputs = { self, nixpkgs, home-manager, ... }: let
     system = "x86_64-linux";
 
     pkgs = import nixpkgs {
@@ -21,19 +20,17 @@
       };
     };
   in {
-    nixosConfigurations = {
-      # TIP: Replace 'nixos' with hostname
-      nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit system; };
-        modules = [
-          ./nixos/configuration.nix
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.yonei = import ./home.nix;
-          }
-        ];
-      };
+    # TIP: Replace 'nixos' with hostname
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit system; };
+      modules = [
+        ./nixos/configuration.nix
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.yonei = import ./home.nix;
+        }
+      ];
     };
   };
 }

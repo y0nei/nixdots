@@ -1,11 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./luks.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./luks.nix
+  ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.supportedFilesystems = [ "btrfs" ];
@@ -21,18 +20,18 @@
     };
   };
 
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-  networking.wireless.iwd.enable = true;
-  networking.networkmanager.wifi.backend = "iwd";
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    wireless.iwd.enable = true;
+    networkmanager.wifi.backend = "iwd";
+  };
 
   time.timeZone = "Europe/Warsaw";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    keyMap = "pl";
-  };
+  console.keyMap = "pl";
 
   # Enable sound.
   security.rtkit.enable = true;
@@ -114,8 +113,8 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
     ];
   };
 
