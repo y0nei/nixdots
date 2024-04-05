@@ -64,6 +64,7 @@
     gcc git wget lm_sensors htop
     doas-sudo-shim
     eza bat
+    networkmanagerapplet
     fastfetch
     zsh starship
     neovim
@@ -73,6 +74,7 @@
     librewolf
     telegram-desktop
     keepassxc
+    p7zip mate.engrampa
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
