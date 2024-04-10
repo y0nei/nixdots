@@ -66,6 +66,7 @@
     networkmanagerapplet
     fastfetch
     zsh starship
+    ffmpeg-full mpv
     neovim
     xdg-utils
     alacritty
@@ -74,6 +75,10 @@
     telegram-desktop
     keepassxc
     p7zip mate.engrampa
+    libsForQt5.kdenlive
+    calibre
+    blueberry
+
     ## Unfree
     obsidian
   ];
