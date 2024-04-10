@@ -74,6 +74,13 @@
     telegram-desktop
     keepassxc
     p7zip mate.engrampa
+    ## Unfree
+    obsidian
+  ];
+
+  # Whitelist some unfree packages
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "obsidian"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
