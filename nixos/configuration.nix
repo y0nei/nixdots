@@ -158,5 +158,14 @@
   # Will be exposed through DBus to programs willing to store secrets.
   services.gnome.gnome-keyring.enable = true;
 
+  services.upower = {
+    enable = true;
+    criticalPowerAction = "Hibernate";
+    # Higher defaults since my two batteries are summed up as one percentage.
+    percentageAction = 5;
+    percentageCritical = 7;
+    percentageLow = 15;
+  };
+
   system.stateVersion = "23.11";
 }
