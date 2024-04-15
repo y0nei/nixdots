@@ -33,6 +33,9 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "pl";
 
+  # Needed for calibre
+  services.udisks2.enable = true;
+
   # Enable sound.
   security.rtkit.enable = true;
   services.pipewire = {
