@@ -9,9 +9,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: let
+  outputs = { self, nixpkgs, ... }@inputs: let
     system = "x86_64-linux";
-
     pkgs = import nixpkgs {
       inherit system;
 
@@ -22,14 +21,9 @@
   in {
     # TIP: Replace 'nixos' with hostname
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit system; };
+      specialArgs = { inherit inputs system; };
       modules = [
         ./nixos/configuration.nix
-        home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.yonei = import ./home.nix;
-        }
       ];
     };
   };
