@@ -12,11 +12,11 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  boot.resumeDevice = "/dev/disk/by-uuid/6dc7c35a-87b0-49ae-b28a-30bda8d7ad5e";
-  boot.kernelParams = [ "resume_offset=8398080" ];
+  boot.resumeDevice = "/dev/disk/by-uuid/c9e733b6-b390-49f7-b1fb-54826c96fd92";
+  boot.kernelParams = [ "resume_offset=2630912" ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/6dc7c35a-87b0-49ae-b28a-30bda8d7ad5e";
+    device = "/dev/disk/by-uuid/c9e733b6-b390-49f7-b1fb-54826c96fd92";
     fsType = "btrfs";
     options = [ "subvol=@" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
@@ -27,43 +27,43 @@
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/6dc7c35a-87b0-49ae-b28a-30bda8d7ad5e";
+    device = "/dev/disk/by-uuid/c9e733b6-b390-49f7-b1fb-54826c96fd92";
     fsType = "btrfs";
     options = [ "subvol=@home" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/6dc7c35a-87b0-49ae-b28a-30bda8d7ad5e";
+    device = "/dev/disk/by-uuid/c9e733b6-b390-49f7-b1fb-54826c96fd92";
     fsType = "btrfs";
     options = [ "subvol=@nix" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/6dc7c35a-87b0-49ae-b28a-30bda8d7ad5e";
+    device = "/dev/disk/by-uuid/c9e733b6-b390-49f7-b1fb-54826c96fd92";
     fsType = "btrfs";
     neededForBoot = true;
     options = [ "subvol=@log" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/var/cache" = {
-    device = "/dev/disk/by-uuid/6dc7c35a-87b0-49ae-b28a-30bda8d7ad5e";
+    device = "/dev/disk/by-uuid/c9e733b6-b390-49f7-b1fb-54826c96fd92";
     fsType = "btrfs";
     options = [ "subvol=@cache" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/tmp" = {
-    device = "/dev/disk/by-uuid/6dc7c35a-87b0-49ae-b28a-30bda8d7ad5e";
+    device = "/dev/disk/by-uuid/c9e733b6-b390-49f7-b1fb-54826c96fd92";
     fsType = "btrfs";
     options = [ "subvol=@tmp" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/.snapshots" = {
-    device = "/dev/disk/by-uuid/6dc7c35a-87b0-49ae-b28a-30bda8d7ad5e";
+    device = "/dev/disk/by-uuid/c9e733b6-b390-49f7-b1fb-54826c96fd92";
     options = [ "subvol=@snapshots" "noatime" "compress-force=zstd:1" "discard=async" "space_cache=v2" "commit=120" ];
   };
 
   fileSystems."/swap" = {
-    device = "/dev/disk/by-uuid/6dc7c35a-87b0-49ae-b28a-30bda8d7ad5e";
+    device = "/dev/disk/by-uuid/c9e733b6-b390-49f7-b1fb-54826c96fd92";
     fsType = "btrfs";
     options = [ "subvol=@swap" "noatime" ];
   };
