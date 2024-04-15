@@ -92,7 +92,15 @@
     blueberry
 
     ## Unfree
-    obsidian
+    # https://discourse.nixos.org/t/partly-overriding-a-desktop-entry/20743/2
+    # HACK: Partially fix blurry Obsidian caused by fractional display scaling.
+    # Using this instead of xdg.desktopEntries because the latter no worky for me :((
+    (obsidian.overrideAttrs (e: rec {
+      desktopItem = e.desktopItem.override (d: {
+        exec = "env OBSIDIAN_USE_WAYLAND=1 ${d.exec} -enable-features=UseOzonePlatform -ozone-platform=wayland";
+      });
+      installPhase = builtins.replaceStrings [ "${e.desktopItem}" ] [ "${desktopItem}" ] e.installPhase;
+    }))
   ];
 
   # Whitelist some unfree packages
