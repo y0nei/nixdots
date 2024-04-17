@@ -28,6 +28,12 @@
     useGlobalPkgs = true;
   };
 
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    # Deduplicate and optimize nix store
+    auto-optimise-store = true;
+  };
+
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
