@@ -2,23 +2,12 @@
 
 {
   imports = [
+    ./boot.nix
     ./hardware-configuration.nix
     ./luks.nix
+    ./video-acceleration.nix
+    ./desktop.nix
   ];
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.supportedFilesystems = [ "btrfs" ];
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-    };
-    grub = {
-      enable = true;
-      efiSupport = true;
-      enableCryptodisk = true;
-      device = "nodev";
-    };
-  };
 
   nix.settings = {
     experimental-features = "nix-command flakes";
@@ -39,6 +28,11 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "pl";
 
+  users.users.yonei = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+  };
+
   # Needed for calibre
   services.udisks2.enable = true;
 
@@ -53,6 +47,7 @@
     alsa.support32Bit = true;
   };
 
+  # Because sudo is bloated.
   security.sudo.enable = false;
   security.doas = {
     enable = true;
@@ -61,11 +56,6 @@
       keepEnv = true;
       persist = true;
     }];
-  };
-
-  users.users.yonei = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -113,68 +103,10 @@
     enableSSHSupport = true;
   };
 
-  # Thunar
-  programs.xfconf.enable = true;
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
-  services.gvfs.enable = true;  # Mount, trash, and other functionalities
-  services.tumbler.enable = true;  # Image thumbnails
-
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-    wrapperFeatures.base = true;
-    extraPackages = with pkgs; [
-      kanshi
-      bemenu wofi  # Menu launchers
-      grim slurp  # Screenshot utils
-      wl-clipboard cliphist  # Clipboard copy/paste
-      mako  # Notifications
-      ((waybar.overrideAttrs (_: {
-        patches = [
-          # FIX: Sway workspaces (https://github.com/Alexays/Waybar/issues/3009)
-          (pkgs.fetchpatch {
-            url = "https://github.com/Alexays/Waybar/commit/2ffd9a94a505a2e7e933ea8303f9cf2af33c35fe.patch";
-            hash = "sha256-u87t6zzslk1mzSfi4HQ6zDPFr7qMfsvymTy3HBxVTJQ=";
-          })
-        ];
-      # FIX: Waybar wants Wireplumber 0.4 but unstable has 0.5
-      })).override { wireplumberSupport = false; })
-    ];
-  };
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-    ];
-  };
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
-
-  nixpkgs.config.packageOverrides = pkgs: {
-    intel-vaapi-driver = pkgs.intel-vaapi-driver.override {
-        enableHybridCodec = true;
-    };
-  };
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-  };
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
 
   security.polkit.enable = true;
   services.openssh.enable = true;
