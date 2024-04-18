@@ -9,7 +9,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: let
+  outputs = { self, nixpkgs, home-manager, ... }: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
@@ -21,9 +21,14 @@
   in {
     # TIP: Replace 'nixos' with hostname
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs system; };
+      specialArgs = { inherit system; };
       modules = [
         ./hosts/thinkpaw/configuration.nix
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.yonei = import ./home-manager/default.nix;
+        }
       ];
     };
   };

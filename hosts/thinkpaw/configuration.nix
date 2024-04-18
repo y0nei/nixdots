@@ -1,10 +1,9 @@
-{ inputs, config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./luks.nix
-    inputs.home-manager.nixosModules.home-manager
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -19,13 +18,6 @@
       enableCryptodisk = true;
       device = "nodev";
     };
-  };
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users.yonei = import ../../home-manager/default.nix;
-    # Fix home-manager complaining about unfree packages
-    useGlobalPkgs = true;
   };
 
   nix.settings = {
@@ -77,7 +69,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    home-manager
     gcc git wget lm_sensors htop
     doas-sudo-shim
     eza bat
