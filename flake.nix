@@ -23,7 +23,7 @@
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs system; };
       modules = [
-        ./nixos/configuration.nix
+        ./hosts/thinkpaw/configuration.nix
       ];
     };
   };
