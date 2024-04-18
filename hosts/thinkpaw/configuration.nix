@@ -69,6 +69,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    home-manager
     gcc git wget lm_sensors htop
     doas-sudo-shim
     eza bat
