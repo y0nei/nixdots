@@ -23,7 +23,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users.yonei = import ../home.nix;
+    users.yonei = import ../../home-manager/default.nix;
     # Fix home-manager complaining about unfree packages
     useGlobalPkgs = true;
   };
