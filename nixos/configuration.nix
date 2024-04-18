@@ -85,7 +85,6 @@
     fastfetch
     zsh starship
     ffmpeg-full mpv
-    neovim
     xdg-utils
     alacritty
     pavucontrol
