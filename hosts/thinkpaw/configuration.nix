@@ -7,6 +7,7 @@
     ./luks.nix
     ./video-acceleration.nix
     ./desktop.nix
+    ./greetd.nix
   ];
 
   nix.settings = {
