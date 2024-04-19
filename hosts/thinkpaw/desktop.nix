@@ -46,13 +46,4 @@
       })).override { wireplumberSupport = false; })
     ];
   };
-
-  # Kanshi systemd service.
-  systemd.user.services.kanshi = {
-    description = "kanshi daemon";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = ''${pkgs.kanshi}/bin/kanshi'';
-    };
-  };
 }
