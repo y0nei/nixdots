@@ -5,9 +5,6 @@
     ./boot.nix
     ./hardware-configuration.nix
     ./luks.nix
-    ./video-acceleration.nix
-    ./desktop.nix
-    ./greetd.nix
   ];
 
   nix.settings = {

@@ -16,7 +16,11 @@
     # TIP: Replace 'nixos' with hostname
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit system; };
-      modules = [ ./hosts/thinkpaw/configuration.nix ];
+      modules = [
+        ./hosts/thinkpaw/configuration.nix
+        ./modules/video-acceleration.nix
+        ./modules/desktop.nix
+      ];
     };
     homeConfigurations.yonei = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
