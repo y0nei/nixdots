@@ -129,6 +129,11 @@
 
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
+      # Docking
+      DEVICES_TO_DISABLE_ON_DOCK="wifi";
+      DEVICES_TO_ENABLE_ON_UNDOCK="wifi";
+
+      DEVICES_TO_DISABLE_ON_STARTUP="bluetooth";
     };
   };
   services.upower = {
