@@ -78,15 +78,7 @@
     hunspell
     hunspellDicts.en_US
     hunspellDicts.pl_PL
-
-    (calibre.override (old: {
-      # FIX: https://github.com/NixOS/nixpkgs/issues/305577
-      python3Packages = old.python3Packages // {
-        mechanize = python311Packages.mechanize.overridePythonAttrs (old: {
-          doCheck = false;
-        });
-      };
-    }))
+    calibre
 
     ## Unfree
     # https://discourse.nixos.org/t/partly-overriding-a-desktop-entry/20743/2
