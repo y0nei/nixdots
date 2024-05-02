@@ -28,7 +28,7 @@
 
   users.users.yonei = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
 
   # Needed for calibre

@@ -20,6 +20,7 @@
         ./hosts/thinkpaw/configuration.nix
         ./modules/video-acceleration.nix
         ./modules/desktop.nix
+        ./modules/docker.nix
       ];
     };
     homeConfigurations.yonei = home-manager.lib.homeManagerConfiguration {
