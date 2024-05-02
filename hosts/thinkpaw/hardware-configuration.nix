@@ -10,8 +10,9 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  # acpi_call makes tlp work for newer thinkpads
+  boot.kernelModules = [ "kvm-intel" "acpi_call "];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   boot.resumeDevice = "/dev/disk/by-uuid/c9e733b6-b390-49f7-b1fb-54826c96fd92";
   boot.kernelParams = [ "resume_offset=2630912" ];
 
