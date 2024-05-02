@@ -74,6 +74,11 @@
     p7zip mate.engrampa
     libsForQt5.kdenlive
     blueberry
+    libreoffice
+    hunspell
+    hunspellDicts.en_US
+    hunspellDicts.pl_PL
+
     (calibre.override (old: {
       # FIX: https://github.com/NixOS/nixpkgs/issues/305577
       python3Packages = old.python3Packages // {
