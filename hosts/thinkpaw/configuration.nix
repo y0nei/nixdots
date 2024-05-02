@@ -125,6 +125,7 @@
   # Will be exposed through DBus to programs willing to store secrets.
   services.gnome.gnome-keyring.enable = true;
 
+  services.throttled.enable = true;
   services.thermald.enable = true;
   services.tlp = {
     enable = true;
@@ -137,7 +138,7 @@
       CPU_MIN_PERF_ON_AC = 0;
       CPU_MAX_PERF_ON_AC = 100;
       CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 50;
+      CPU_MAX_PERF_ON_BAT = 75;
 
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
