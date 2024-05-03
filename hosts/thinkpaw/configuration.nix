@@ -115,6 +115,9 @@
   # Will be exposed through DBus to programs willing to store secrets.
   services.gnome.gnome-keyring.enable = true;
 
+  # Better scheduling for CPU cycles
+  services.system76-scheduler.settings.cfsProfiles.enable = true;
+
   services.throttled.enable = true;
   services.tlp = {
     enable = true;
