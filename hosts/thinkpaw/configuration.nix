@@ -124,11 +124,16 @@
     settings = {
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       DEVICES_TO_DISABLE_ON_STARTUP="bluetooth";
       DEVICES_TO_DISABLE_ON_DOCK="wifi";
       DEVICES_TO_ENABLE_ON_UNDOCK="wifi";
     };
   };
+  # Disable GNOME's power managment (conflicts with TLP)
+  services.power-profiles-daemon.enable = false;
+
   services.upower = {
     enable = true;
     criticalPowerAction = "Hibernate";
