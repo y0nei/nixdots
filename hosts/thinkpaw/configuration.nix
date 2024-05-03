@@ -63,7 +63,7 @@
     fastfetch
     zsh starship
     ffmpeg-full mpv
-    xdg-utils
+    xdg-utils xdg-user-dirs
     alacritty foot
     pavucontrol
     librewolf
