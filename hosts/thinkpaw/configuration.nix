@@ -118,27 +118,14 @@
   services.gnome.gnome-keyring.enable = true;
 
   services.throttled.enable = true;
-  services.thermald.enable = true;
   services.tlp = {
     enable = true;
     settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 75;
-
       CPU_BOOST_ON_AC = 1;
       CPU_BOOST_ON_BAT = 0;
-      # Docking
+      DEVICES_TO_DISABLE_ON_STARTUP="bluetooth";
       DEVICES_TO_DISABLE_ON_DOCK="wifi";
       DEVICES_TO_ENABLE_ON_UNDOCK="wifi";
-
-      DEVICES_TO_DISABLE_ON_STARTUP="bluetooth";
     };
   };
   services.upower = {
