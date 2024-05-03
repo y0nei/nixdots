@@ -4,6 +4,7 @@
   imports = [
     ./editors.nix
     ./gtk-qt.nix
+    ./kanshi.nix
   ];
 
   home.username = "yonei";
