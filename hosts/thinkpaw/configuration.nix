@@ -66,7 +66,7 @@
     zsh starship
     ffmpeg-full mpv
     xdg-utils
-    alacritty
+    alacritty foot
     pavucontrol
     librewolf
     telegram-desktop
