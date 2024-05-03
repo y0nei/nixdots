@@ -9,7 +9,7 @@
   ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" "i915" ];
   # acpi_call makes tlp work for newer thinkpads
   boot.kernelModules = [ "kvm-intel" "acpi_call "];
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
