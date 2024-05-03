@@ -26,7 +26,9 @@
 
   programs.sway = {
     enable = true;
-    package = pkgs.swayfx.overrideAttrs (_: {passthru.providedSessions = ["sway"];});
+    package = pkgs.swayfx.overrideAttrs (_: {
+      passthru.providedSessions = ["sway"];
+    });
     wrapperFeatures.gtk = true;
     wrapperFeatures.base = true;
     extraPackages = with pkgs; [
@@ -37,5 +39,9 @@
       wl-clipboard cliphist  # Clipboard copy/paste
       waybar
     ];
+  };
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";  # Electron Wayland support
   };
 }
